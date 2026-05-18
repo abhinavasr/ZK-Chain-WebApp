@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ASL ZK Chain — POC</title>
+<title>ASL ZK Chain — MPC POC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -12,12 +12,11 @@
 </head>
 <body>
 
-<!-- ═══ NAV ═══════════════════════════════════════════════════════ -->
 <nav class="nav">
   <div class="nav-brand">
     <span class="nav-logo">⬡</span>
     ASL ZK Chain
-    <span class="nav-badge">POC · SIMULATED</span>
+    <span class="nav-badge">MPC · SIMULATED</span>
   </div>
   <div class="nav-tabs">
     <button class="nav-tab active" data-tab="builder" onclick="switchTab('builder')">
@@ -29,24 +28,20 @@
   </div>
 </nav>
 
-<!-- ═══ BUILDER ════════════════════════════════════════════════════ -->
 <div id="pane-builder" class="pane active">
   <div class="pane-inner">
-
-    <!-- Header -->
     <div class="pane-header">
       <div>
-        <h1>Delegation Chain Builder</h1>
+        <h1>MPC Delegation Chain Builder</h1>
         <p class="pane-desc">
-          Each entity's <span class="hl-green">output commitment</span> becomes the next entity's
-          <span class="hl-green">input commitment</span>.
-          Amounts are validated off-chain — the on-chain dataset contains
-          <strong>zero monetary values</strong>, only cryptographic envelopes.
+          Each entity's <span class="hl-green">remaining commitment</span> is updated as children are allocated.
+          Amounts are jointly proven via a <span class="hl-purple">3-round MPC protocol</span> —
+          neither party ever learns the other's private value.
         </p>
         <div class="legend">
           <span class="legend-item amber"><span class="dot"></span> Private · off-chain</span>
           <span class="legend-item green"><span class="dot"></span> Public · on-chain</span>
-          <span class="legend-item indigo"><span class="dot"></span> ZK proof</span>
+          <span class="legend-item purple"><span class="dot"></span> MPC engine</span>
         </div>
       </div>
       <div class="pane-actions">
@@ -58,42 +53,32 @@
         </button>
       </div>
     </div>
-
-    <!-- Entity list -->
     <div id="entity-list"></div>
-
-    <!-- On-chain export panel -->
     <div id="export-panel" class="export-panel" style="display:none"></div>
-
   </div>
 </div>
 
-<!-- ═══ VERIFIER ═══════════════════════════════════════════════════ -->
 <div id="pane-verifier" class="pane">
   <div class="pane-inner">
-
     <div class="pane-header">
       <div>
-        <h1>Groth16 Proof Verifier</h1>
+        <h1>Groth16 Verifier</h1>
         <p class="pane-desc">
-          Paste the on-chain dataset below and verify each record's
-          proof structure, chain linkage, and nullifier uniqueness using
-          simulated Groth16 / bn128 pairing checks.
+          Verifies chain linkage, conservation constraints
+          (<code>amountBefore = childAmount + amountAfter</code>),
+          proof structure, and nullifier uniqueness.
         </p>
       </div>
     </div>
-
     <div class="ver-input-wrap">
       <label class="field-label">On-chain records (JSON)</label>
-      <textarea id="ver-input" class="ver-textarea" placeholder='Paste on-chain JSON here — or use "Export On-Chain Data" then "Copy & Open Verifier" in the builder...'></textarea>
+      <textarea id="ver-input" class="ver-textarea"
+        placeholder='Paste on-chain JSON here, or click "Copy & Open Verifier" from the builder...'></textarea>
     </div>
-
     <button class="btn btn-primary" onclick="runVerify()">
       <i class="fa-solid fa-shield-check"></i> Verify with Groth16
     </button>
-
     <div id="ver-result"></div>
-
   </div>
 </div>
 
