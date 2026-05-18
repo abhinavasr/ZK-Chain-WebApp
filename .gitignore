@@ -1,0 +1,10 @@
+node_modules/
+.env
+build/
+artifacts/
+cache/
+frontend/public/
+frontend/config.js
+frontend/config.json
+typechain/
+typechain-types/

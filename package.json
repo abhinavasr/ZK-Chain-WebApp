@@ -1,0 +1,22 @@
+{
+  "name": "zk-chain-real",
+  "version": "2.0.0",
+  "description": "ASL ZK Delegation Chain — Real Circom + Groth16 + Sepolia",
+  "scripts": {
+    "setup":  "bash scripts/setup.sh",
+    "deploy": "npx hardhat run scripts/deploy.js --network sepolia",
+    "test":   "npx hardhat test",
+    "node":   "npx hardhat node"
+  },
+  "dependencies": {
+    "circomlibjs": "^0.1.7",
+    "snarkjs": "^0.7.3"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-etherscan": "^3.1.7",
+    "circomlib": "^2.0.5",
+    "ethers": "^5.7.2",
+    "hardhat": "^2.19.0"
+  }
+}
