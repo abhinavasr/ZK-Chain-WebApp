@@ -1,22 +1,14 @@
 {
-  "name": "zk-chain-real",
-  "version": "2.0.0",
-  "description": "ASL ZK Delegation Chain — Real Circom + Groth16 + Sepolia",
+  "name": "zk-chain-funded-contract-poc",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Privacy-preserving Mastercard → PSP → Business → Agent → Merchant funded-contract and settlement POC",
   "scripts": {
-    "setup":  "bash scripts/setup.sh",
-    "deploy": "npx hardhat run scripts/deploy.js --network sepolia",
-    "test":   "npx hardhat test",
-    "node":   "npx hardhat node"
+    "dev": "npm --prefix frontend run dev -- --host 0.0.0.0",
+    "build": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview -- --host 0.0.0.0",
+    "simulate": "node simulation/simulate-flow.js",
+    "test": "npm run simulate && npm run build"
   },
-  "dependencies": {
-    "circomlibjs": "^0.1.7",
-    "snarkjs": "^0.7.3"
-  },
-  "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.2.3",
-    "@nomiclabs/hardhat-etherscan": "^3.1.7",
-    "circomlib": "^2.0.5",
-    "ethers": "^5.7.2",
-    "hardhat": "^2.19.0"
-  }
+  "devDependencies": {}
 }

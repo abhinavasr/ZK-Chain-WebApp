@@ -1,0 +1,25 @@
+services:
+  app:
+    build: .
+    container_name: zk-chain-funded-contract-app
+    ports:
+      - "8787:80"
+    restart: unless-stopped
+
+  simulation:
+    image: node:22-alpine
+    working_dir: /workspace
+    volumes:
+      - .:/workspace:ro
+    command: ["node", "simulation/simulate-flow.js"]
+    profiles: ["simulation"]
+
+  local-chain:
+    image: ghcr.io/foundry-rs/foundry:latest
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+    command: ["anvil", "--host", "0.0.0.0"]
+    ports:
+      - "8545:8545"
+    profiles: ["chain"]

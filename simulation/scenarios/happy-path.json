@@ -1,0 +1,6 @@
+{
+  "name": "happy-path",
+  "agents": 3,
+  "merchantsPerAgent": 2,
+  "settleAll": true
+}

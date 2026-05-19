@@ -8,3 +8,5 @@ frontend/config.js
 frontend/config.json
 typechain/
 typechain-types/
+frontend/dist/
+frontend/node_modules/

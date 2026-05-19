@@ -1,0 +1,10 @@
+# ER Diagram
+
+```mermaid
+erDiagram
+  PROGRAM_AUTHORIZATION ||--o{ BUSINESS_CONTRACT : authorizes
+  BUSINESS_CONTRACT ||--o{ AGENT_AUTHORITY : funds
+  AGENT_AUTHORITY ||--o{ MERCHANT_RECEIVABLE : creates
+  SETTLEMENT_BATCH ||--o{ MERCHANT_RECEIVABLE : settles
+  NULLIFIER_REGISTRY ||--o{ SETTLEMENT_BATCH : protects
+```
